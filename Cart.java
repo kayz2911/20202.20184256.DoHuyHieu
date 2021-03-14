@@ -20,8 +20,15 @@ public class Cart {
 	
 	public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
 		if(qtyOrdered > 0) {
-			qtyOrdered--;
-			
+			for(int i = 0; i < qtyOrdered; i++) {
+				if (itemsOrdered[i] == disc) {
+					for(int j = i; j < qtyOrdered - 1; j++) {
+						itemsOrdered[j] = itemsOrdered[j+1];
+					}
+					qtyOrdered--;
+				}
+			}
+			System.out.println("The disc "+ disc.getTitle() +" has been removed");
 		}
 		else System.out.println("The cart is empty");
 	}
