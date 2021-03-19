@@ -18,6 +18,12 @@ public class Cart {
 		else System.out.println("The cart is almost full");
 	}
 	
+	public void addDigitalVideoDisc(DigitalVideoDisc [] dvdList) {
+		if(qtyOrdered <= MAX_NUMBER_ORDERED) {
+			
+		}else System.out.println("The cart is almost full");
+	}
+	
 	public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
 		if(qtyOrdered > 0) {
 			for(int i = 0; i < qtyOrdered; i++) {

@@ -49,4 +49,8 @@ public class DigitalVideoDisc {
 		return cost;
 	}
 	
+	public String setTitle(String title){
+		return title;
+	}
+	
 }
