@@ -17,10 +17,14 @@ public class Aims {
 		anOrder.addDigitalVideoDisc(dvd3);
 		
 		anOrder.removeDigitalVideoDisc(dvd2);
+		
+		//System.out.println(anOrder.getQtyOrdered());
+		
+		
 		//Print total cost of the order
 		System.out.println("Total cost is:");
 		System.out.println(anOrder.totalCost());
-		// System.out.println(anOrder.getQtyOrdered());
+		
 	}
 
 }
