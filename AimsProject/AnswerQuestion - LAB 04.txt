@@ -1,0 +1,7 @@
++, After the call of swap(jungleDVD, cinderellaDVD), the title of these two
+objects still remain because Java creates a copy of the variable being passed 
+in the method and then do the manipulations. Hence the change is not reflected in the main method
+
++, After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle())
+the title of the JungleDVD changed because we change the value of class and Java creates a copy of 
+the variable being passed in the method and then do the manipulations.
