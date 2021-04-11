@@ -7,9 +7,12 @@ public class Book extends Media {
 
 	private List<String> authors = new ArrayList<String>();
 	
-	public Book(int id, String title, String category, float cost, List<String> authors) {
+	public Book (String title, String category, float cost) {
 		super(title,category,cost);
-		this.id = id;
+	}
+	
+	public Book(String title, String category, float cost, List<String> authors) {
+		super(title,category,cost);
 		this.authors = authors;
 	}
 
@@ -79,8 +82,13 @@ public class Book extends Media {
 		}
 	}
 	
-	public Book() {
-		// TODO Auto-generated constructor stub
+	public void play() {
+		super.play();
+		System.out.println("Can not play a book");
+	}
+	
+	public String getDetail() {
+		return id + ".Book " + title + " - " + category  + "- " + cost +"$" + "-" + authors;
 	}
 
 }

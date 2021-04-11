@@ -33,5 +33,13 @@ public class Disc extends Media {
 	public Disc(String title, String category, float cost) {
 		super(title,category,cost);
 	}
+	
+	public String getDetail() {
+		return id + ".DVD " + title + " - " + category  + "- " + cost +" $";
+	}
+	
+	public void play() {
+		
+	}
 
 }

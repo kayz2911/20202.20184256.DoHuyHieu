@@ -53,13 +53,17 @@ abstract public class Media {
 	}
 	
 	public String getDetail() {
-		return id + ".DVD " + title + " - " + category + " - " + ": " + cost +" $";
+		return id + ".DVD " + title + " - " + category  + "- " + cost +" $";
 	}
 	
 	public boolean search(String title) {
 		String caseInsensitive = this.title.toLowerCase();
 		title = title.toLowerCase();
 		return caseInsensitive.contains(title);
+	}
+	
+	public void play() {
+		
 	}
 	
 	

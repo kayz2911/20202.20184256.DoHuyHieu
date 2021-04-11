@@ -1,6 +1,7 @@
 package hust.soict.globalict.aims.cart;
 import java.util.ArrayList;
 import hust.soict.globalict.aims.media.*;
+import java.util.Scanner;
 
 public class Cart {
 	public static final int MAX_NUMBER_ORDERED = 20;
@@ -121,7 +122,7 @@ public class Cart {
 				}
 			}	
 		}
-		System.out.println("***************CART**********");
+		System.out.println("***********CART**********");
 		System.out.println("Ordered Items:");
 		for (int i = 0 ; i < itemsOrdered.size(); i++) {
 			System.out.println(sort.get(i).getDetail());
@@ -130,9 +131,22 @@ public class Cart {
 		System.out.println("*************************");
 	}
 	
-	public void getLuckyItem() {
-		int luck = (int)(Math.random() * (itemsOrdered.size()-1));
-		itemsOrdered.get(luck).setCost(0);	
+	public void seeCurrentCart(){
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.println("Choose id media to play:");
+		int id = scan.nextInt();
+		int flag = 0;
+		for(Media item : itemsOrdered) {
+			if(item.getID() == id) {
+				item.play();
+				flag = 1;
+			}
+		}
+		if(flag == 0) {
+			System.out.println("Can not match this id");
+		}
+
 	}
 }
 	

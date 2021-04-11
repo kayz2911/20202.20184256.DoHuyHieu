@@ -1,17 +1,28 @@
 package hust.soict.globalict.aims;
 import hust.soict.globalict.aims.cart.*;
 import hust.soict.globalict.aims.store.*;
-
+import hust.soict.globalict.aims.media.Book;
+import hust.soict.globalict.aims.media.CompactDisc;
 import hust.soict.globalict.aims.media.DigitalVideoDisc;
+import hust.soict.globalict.aims.media.Track;
 import java.util.Scanner;
+
+import Threads.MemoryDaemon;
 
 public class Aims {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// Create a new cart
+		Thread thread = new Thread(new MemoryDaemon());
+		thread.setDaemon(true);
+		
+		
+		
 		Cart anOrder = new Cart();
 		Store aStore = new Store();
+		//MemoryDaemon memory = new MemoryDaemon();
+		
 		
 		// Create a new DVD objects and add them to the cart
 		DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Aller", 87, 19.95f);
@@ -23,16 +34,22 @@ public class Aims {
 		DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
 		aStore.addMedia(dvd3);
 		
-		//anOrder.removeDigitalVideoDisc(dvd2);
+		Track track1 = new Track("A",1);
+		Track track2 = new Track("B",2);
+		Track track3 = new Track("C",3);
 		
-		//System.out.println(anOrder.getQtyOrdered());
+		CompactDisc dvd4 = new CompactDisc("Lion Star","Animation","Geogre", 14, 31.2f);
+		dvd4.addTrack(track1);
+		dvd4.addTrack(track2);
+		dvd4.addTrack(track3);
+		aStore.addMedia(dvd4);
 		
-		
-		//Print total cost of the order
-		//System.out.println("Total cost is:");
-		//System.out.println(anOrder.totalCost());
-		
-		
+		String author1 = "Lucas";
+		String author2 = "Aller";
+		Book book1 =  new Book("a","b",21f);
+		book1.addAuthor(author1);
+		book1.addAuthor(author2);
+		aStore.addMedia(book1);	
 		
 		Scanner scan = new Scanner(System.in);
 		int choice, choice1,choice2;
@@ -63,7 +80,7 @@ public class Aims {
 						}
 						break;
 					case 3:
-                        anOrder.printList();
+                        anOrder.seeCurrentCart();
 						break;
 					case 0:
 						break;
@@ -76,8 +93,8 @@ public class Aims {
 				do {
 					System.out.println("--------------------");
 					System.out.println("Options: ");
-					System.out.println("1. Add DVD into Store");
-					System.out.println("2. Remove DVD from Store");
+					System.out.println("1. Add media into Store");
+					System.out.println("2. Remove media from Store");
 					System.out.println("0. Exit");
 					System.out.println("--------------------");
 					System.out.println("Your choice: ");
@@ -130,8 +147,8 @@ public class Aims {
 						do {
 							System.out.println("Options: ");
 							System.out.println("--------------------");
-							System.out.println("1. Filter DVDs by Id");
-							System.out.println("2. Filter DVDs by Title ");
+							System.out.println("1. Filter media by Id");
+							System.out.println("2. Filter media by Title ");
 							System.out.println("0. Exit");
 							System.out.println("--------------------");	
 							System.out.println("Your choice: ");
@@ -167,10 +184,6 @@ public class Aims {
 						anOrder.printList();
 						break;
 					case 4:
-						anOrder.getLuckyItem();
-						anOrder.printList();
-						break;
-					case 5:
 						System.out.println("An order is created!");
 						anOrder.placeOrder();
 						break;
@@ -187,6 +200,10 @@ public class Aims {
 				System.out.println("Invalid choice ");
 			}
 		}while(choice != 0);
+		//memory.run();
+		thread.run();
+		
+		
 	}
 	
 	public static void showMenu() {
@@ -194,7 +211,7 @@ public class Aims {
 		System.out.println("--------------------");
 		System.out.println("1. View store");
 		System.out.println("2. Update store ");
-		System.out.println("3. See current cart");
+		System.out.println("3. Get details from current cart");
 		System.out.println("0. Exit");
 		System.out.println("--------------------");
 		System.out.println("Please choose a number: 0-1-2-3");
@@ -217,8 +234,7 @@ public class Aims {
 		System.out.println("1. Filter medias in cart");
 		System.out.println("2. Sort medias in cart");
 		System.out.println("3. Remove medias from cart ");
-		System.out.println("4. Get a lucky item from cart ");
-		System.out.println("5. Place order");
+		System.out.println("4. Place order");
 		System.out.println("0. Exit");
 		System.out.println("--------------------");
 		System.out.println("Please choose a number: 0-1-2-3-4-5");
