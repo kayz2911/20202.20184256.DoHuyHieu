@@ -72,4 +72,12 @@ public class Store {
 		}
 		return null;
 	}
+	
+	public ArrayList<Media> getItemsInStore() {
+		ArrayList<Media> mediaInStore = new ArrayList<Media>();
+		for (Media item : itemsInStore) {
+			mediaInStore.add(item);
+		}
+		return mediaInStore;
+	}
 }
