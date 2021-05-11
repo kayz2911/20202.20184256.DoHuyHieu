@@ -1,28 +1,24 @@
 package hust.soict.globalict.aims.screen;
 import javax.swing.*;
 
-
 import hust.soict.globalict.aims.media.CompactDisc;
-
+import hust.soict.globalict.aims.media.Track;
 import hust.soict.globalict.aims.store.Store;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class AddCD extends JFrame {
+public class AddCD extends StoreScreen {
 	private JTextField title;
 	private JTextField category;
 	private JTextField cost;
 	private JTextField director;
+	private ArrayList<Track> tracks = new ArrayList<Track>();
 	private JTextField length;
-	public Store store = new Store();
-	JPanel createNorth() {
-		JPanel north = new JPanel();
-		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
-		
-		return north;
-	}
+	public Store store2 = new Store();
+	
 	JPanel createCenter() {
 		JPanel center = new JPanel();
 		
@@ -55,13 +51,16 @@ public class AddCD extends JFrame {
 	}
 	JPanel createBottom() {
 		JPanel Bottom = new JPanel();
-		Bottom.setLayout(new GridLayout(1, 5));
 		JButton send = new JButton("Send");
 		send.addActionListener(new SendListener());
-		send.setPreferredSize(new Dimension(70,30));
-		send.setMaximumSize(new Dimension(70, 30));
+		
+		JButton addTrack = new JButton("Add Track");
+		addTrack.addActionListener(new AddTrackInputListener());
+		
 		Bottom.add(Box.createHorizontalGlue());
 		Bottom.add(send, BorderLayout.CENTER);
+		Bottom.add(Box.createHorizontalGlue());
+		Bottom.add(addTrack, BorderLayout.CENTER);
 		Bottom.add(Box.createHorizontalGlue());
 		
 		Bottom.add(Box.createRigidArea(new Dimension(50, 30)));
@@ -71,21 +70,48 @@ public class AddCD extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			String button = e.getActionCommand();
 			String title1 = title.getText();
 			String category1 = category.getText();
 			String director1 = director.getText();
 			Float cost1 = Float.parseFloat(cost.getText());
 			int length1 = Integer.parseInt(length.getText());
-			CompactDisc cd1 = new CompactDisc(title1, category1, director1,length1, cost1);
-			store.addMedia(cd1);
+			CompactDisc cd1 = new CompactDisc(title1, category1, director1, length1, cost1);
+			cd1.addTrack(tracks);
+			store2.addMedia(cd1);
 			JOptionPane.showMessageDialog(null,"Add Successfully!");
 			
 		}
 		
 	}
-	public AddCD() {
+	
+	private class AddTrackInputListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			new addTrack();
+		}
+	}
+	
+	public class addTrack{
+		public addTrack() {
+			JPanel fa = new JPanel();
+			JTextField title = new JTextField(30);
+			JTextField length = new JTextField(10);
+			fa.add(new JLabel("Title:"));
+			fa.add(title);
+			fa.add(new JLabel("Length:"));
+			fa.add(length);
+			int result = JOptionPane.showConfirmDialog(null, fa, "Track", JOptionPane.OK_CANCEL_OPTION);
+			if(result == JOptionPane.OK_OPTION) {
+				Track track1 = new Track(title.getText(), Integer.parseInt(length.getText()));
+				tracks.add(track1);
+			}
+		}
+	}
+	
+	public AddCD(Store store) {
+		super(store);
+		this.store2 = store;
 		Container cp = getContentPane();
 		cp.setLayout(new BorderLayout());
 		
@@ -97,8 +123,6 @@ public class AddCD extends JFrame {
 		setSize(500, 300);
 		setTitle("Add CD");
 	}
-	public static void main(String[] args) {
-		new AddCD();
-	}
+	
 	
 }

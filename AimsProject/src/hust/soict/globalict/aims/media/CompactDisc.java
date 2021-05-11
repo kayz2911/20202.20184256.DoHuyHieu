@@ -36,7 +36,11 @@ public class CompactDisc extends Disc implements Playable {
 		super(title,category,cost);
 	}
 	
-	
+	public void addTrack(ArrayList<Track> track1) {
+		for(int i = 0;i<track1.size();i++) {
+			tracks.add(track1.get(i));
+		}
+	}
 	
 	public void addTrack(Track tr){
 		int flag = 0;

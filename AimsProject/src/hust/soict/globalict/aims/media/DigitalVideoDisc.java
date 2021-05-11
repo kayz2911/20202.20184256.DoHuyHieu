@@ -1,4 +1,12 @@
 package hust.soict.globalict.aims.media;
+
+import java.awt.GridLayout;
+import java.awt.Panel;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 public class DigitalVideoDisc extends Disc implements Playable {
 	public DigitalVideoDisc(String title, String category, String director, int length, float cost,int id) {
 		super(title,category,director,length,cost,id);
@@ -17,8 +25,11 @@ public class DigitalVideoDisc extends Disc implements Playable {
 	}
 	
 	public void play() {
-		System.out.println("Playing DVD: " + this.getTitle());
-		System.out.println("DVD length: " + this.getLength());
+		JPanel fa = new JPanel();
+		fa.setLayout(new GridLayout(2,1));
+		fa.add(new JLabel("Title:" + title));
+		fa.add(new JLabel("Length: " + length));
+		int result = JOptionPane.showConfirmDialog(null, fa, "Playing " + title, JOptionPane.NO_OPTION);;
 	}
 	
 	@Override

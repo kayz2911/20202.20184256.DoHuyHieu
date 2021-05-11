@@ -7,20 +7,14 @@ import hust.soict.globalict.aims.store.Store;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class AddDigitalVideoDisc extends JFrame {
+public class AddDigitalVideoDisc extends StoreScreen {
 	private JTextField title;
 	private JTextField category;
 	private JTextField cost;
 	private JTextField director;
 	private JTextField length;
-	public Store store = new Store();
+	private Store store2;
 	
-	JPanel createNorth() {
-		JPanel north = new JPanel();
-		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
-		
-		return north;
-	}
 	JPanel createCenter() {
 		JPanel center = new JPanel();
 		
@@ -30,28 +24,26 @@ public class AddDigitalVideoDisc extends JFrame {
 		title = new JTextField(50);
 		center.add(title);
 		
-		
 		center.add(new JLabel("Enter category:"));
 		category = new JTextField(50);
 		center.add(category);
 		
-		
 		center.add(new JLabel("Enter cost:"));
-		cost = new JTextField(10);		
+		cost = new JTextField(10);
 		center.add(cost);
 		
 		center.add(new JLabel("Enter director:"));
 		director = new JTextField(50);
+
 		center.add(director);
 		
 		center.add(new JLabel("Enter length:"));
 		length = new JTextField(10);
 		center.add(length);
 		
-		
 		return center;
 	}
-	JPanel createBottom() {
+	JPanel createBottom(Store store) {
 		JPanel Bottom = new JPanel();
 		Bottom.setLayout(new GridLayout(1, 5));
 		JButton send = new JButton("Send");
@@ -69,35 +61,30 @@ public class AddDigitalVideoDisc extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			String button = e.getActionCommand();
 			String title1 = title.getText();
 			String category1 = category.getText();
 			String director1 = director.getText();
 			Float cost1 = Float.parseFloat(cost.getText());
 			int length1 = Integer.parseInt(length.getText());
 			DigitalVideoDisc dvd1 = new DigitalVideoDisc(title1, category1, director1, length1, cost1);
-			store.addMedia(dvd1);
-			JOptionPane.showMessageDialog(null,"Add Successfully!");
-			
+			store2.addMedia(dvd1);
+			JOptionPane.showMessageDialog(null,"Successfully!");
 		}
 		
 	}
-	public AddDigitalVideoDisc() {
+	public AddDigitalVideoDisc(Store store) {
+		super(store);
+		this.store2 = store;
 		Container cp = getContentPane();
 		cp.setLayout(new BorderLayout());
 		
 		cp.add(createNorth(), BorderLayout.NORTH);
 		cp.add(createCenter(), BorderLayout.CENTER);
-		cp.add(createBottom(), BorderLayout.SOUTH);
+		cp.add(createBottom(store), BorderLayout.SOUTH);
 		
 		setVisible(true);
 		setSize(500, 300);
 		setTitle("Add DVD");
-	}
-	
-	public static void main(String[] args) {
-		new AddDigitalVideoDisc();
 	}
 	
 }

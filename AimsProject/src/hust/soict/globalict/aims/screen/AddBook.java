@@ -10,19 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.List;
-public class AddBook extends JFrame {
+public class AddBook extends StoreScreen {
 	private JTextField title;
 	private JTextField category;
 	private JTextField cost;
 	private JTextField author;
 	private JTextField content;
-	public Store store = new Store();
-	JPanel createNorth() {
-		JPanel north = new JPanel();
-		north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
-		
-		return north;
-	}
+	public Store store2;
 	JPanel createCenter() {
 		JPanel center = new JPanel();
 		
@@ -79,13 +73,15 @@ public class AddBook extends JFrame {
 			Float cost1 = Float.parseFloat(cost.getText());
 			String content1 = content.getText();
 			Book book1 = new Book(title1, category1, cost1, author1, content1);
-			store.addMedia(book1);
+			store2.addMedia(book1);
 			JOptionPane.showMessageDialog(null,"Add Successfully!");
 			
 		}
 		
 	}
-	public AddBook() {
+	public AddBook(Store store) {
+		super(store);
+		this.store2 = store;
 		Container cp = getContentPane();
 		cp.setLayout(new BorderLayout());
 		
@@ -96,9 +92,6 @@ public class AddBook extends JFrame {
 		setVisible(true);
 		setSize(500, 300);
 		setTitle("Add Book");
-	}
-	public static void main(String[] args) {
-		new AddBook();
 	}
 	
 }
