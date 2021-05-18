@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<fx:root type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="hust.soict.globalict.javafx.PainterController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hust.soict.globalict.javafx.PainterController">
+   <padding>
+      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+   </padding>
+   <left>
+      <VBox maxHeight="1.7976931348623157E308" spacing="8.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets right="8.0" />
+         </BorderPane.margin>
+         <children>
+            <TitledPane animated="false" maxWidth="1.7976931348623157E308" text="Tools">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <RadioButton layoutX="6.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#penfunction" selected="true" text="Pen">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="identical" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton layoutX="6.0" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#erasefunction" text="Eraser" toggleGroup="$identical" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </TitledPane>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clearButtonPressed" text="Clear" />
+         </children>
+      </VBox>
+   </left>
    <center>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-         </padding>
-         <left>
-            <VBox fx:id="drawingAreaPane" maxHeight="1.7976931348623157E308" spacing="8.0" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets right="8.0" />
-               </BorderPane.margin>
-               <children>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clearButtonPressed" text="Clear" />
-               </children>
-            </VBox>
-         </left>
-         <center>
-            <Pane onMouseDragged="#drawingAreaMouseDragged" prefHeight="464.0" prefWidth="611.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
-         </center>
-      </BorderPane>
+      <Pane fx:id="drawingAreaPane" onMouseDragged="#drawingAreaMouseDragged" onMouseMoved="#drawingAreaMouseDragged" onMousePressed="#drawingAreaMouseDragged" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
    </center>
-</fx:root>
+</BorderPane>
