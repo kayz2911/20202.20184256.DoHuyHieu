@@ -1,16 +1,17 @@
 package hust.soict.globalict.aims.cart;
-import java.util.ArrayList;
 import hust.soict.globalict.aims.media.*;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.Scanner;
-import java.util.Collections;
-import java.util.List;
+
 
 
 
 public class Cart {
 	public static final int MAX_NUMBER_ORDERED = 20;
-	public float cost = 0;
-	private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
+	public ObservableList<Media> itemsOrdered =  FXCollections.observableArrayList();
 	
     public boolean isEmpty() {
         return itemsOrdered.isEmpty();
@@ -21,10 +22,11 @@ public class Cart {
     }
 	
 	public float totalCost() {
-		for(Media item : itemsOrdered) {
-			cost += item.getCost();
+		float sum = 0;
+		for(int i = 0;i<itemsOrdered.size();i++) {
+			sum += itemsOrdered.get(i).getCost();
 		}
-		return cost;
+		return sum;
 	}
 	
 	public void addMedia(Media media) {
@@ -33,6 +35,12 @@ public class Cart {
 		}else {
 			itemsOrdered.add(media);
 			System.out.println("The media "+ media.getTitle() +" has been added");
+		}
+	}
+	
+	public void removeMedia() {
+		if (itemsOrdered.size() >0) {
+			itemsOrdered.remove(itemsOrdered.size()-1);
 		}
 	}
 	
@@ -110,7 +118,7 @@ public class Cart {
     }
 	
 	public void sortByTitle() {
-		ArrayList<Media>  sort = itemsOrdered;
+		ObservableList<Media>  sort = itemsOrdered;
 		for (int i = 0; i <  itemsOrdered.size() - 1; i++) {
 			for (int j = i+1; j < itemsOrdered.size() ; j++) {
 				if (sort.get(i).getTitle().compareTo(sort.get(j).getTitle()) > 0) {
@@ -136,7 +144,7 @@ public class Cart {
 	}
 	
 	public void sortByCost() {
-		ArrayList<Media>  sort = itemsOrdered;
+		ObservableList<Media>  sort = itemsOrdered;
 		for (int i = 0; i <  itemsOrdered.size() - 1; i++) {
 			for (int j = i+1; j < itemsOrdered.size() ; j++) {
 				if (sort.get(i).getCost() < sort.get(j).getCost()) {
@@ -179,43 +187,11 @@ public class Cart {
 		}
 
 	}
+
+	public ObservableList<Media> getItemsOrdered() {
+		return itemsOrdered;
+	}	
 	
-	public void sortByTitleandCategory() {
-		ArrayList<Media> sort = (ArrayList<Media>)itemsOrdered.clone();
-		Collections.sort((List)sort);
-		System.out.println("********CART*******");
-		System.out.println("Ordered Items by Title and Category:");
-		for (Media media : sort) {
-			System.out.println(media.toString());
-		}
-		System.out.printf("Total cost: %.2f",totalCost());
-		System.out.println("*******************");
-	}
-	
-	public void sortByTitleThenByCost() {
-		ArrayList<Media> sort = (ArrayList<Media>)itemsOrdered.clone();
-		Collections.sort((List)sort,Media.COMPARE_BY_TITLE_COST);
-		System.out.println("********CART*******");
-		System.out.println("Ordered Items bu Title then by Cost:");
-		for (Media media : sort) {
-			System.out.println(media.toString());
-		}
-		System.out.printf("Total cost: %.2f",totalCost());
-		System.out.println("*******************");
-	}
-	
-	public void sortByCostthenByTitle() {
-		ArrayList<Media> sort = (ArrayList<Media>)itemsOrdered.clone();
-	
-		Collections.sort((List)sort,Media.COMPARE_BY_COST_TITLE);
-		System.out.println("********CART*******");
-		System.out.println("Ordered Items by Cost then by Title:");
-		for (Media media : sort) {
-			System.out.println(media.toString());
-		}
-		System.out.printf("Total cost: %.2f",totalCost());
-		System.out.println("*******************");
-	}
 	
 }
 	

@@ -242,13 +242,13 @@ public class Aims {
 							scan.nextLine();
 							switch(choice2) {
 							case 1:
-								anOrder.sortByTitleandCategory();
+								//anOrder.sortByTitleandCategory();
 								break;
 							case 2:
-								anOrder.sortByTitleThenByCost();
+								//anOrder.sortByTitleThenByCost();
 								break;
 							case 3:
-								anOrder.sortByCostthenByTitle();
+								//anOrder.sortByCostthenByTitle();
 								break;
 							case 0:
 								break;

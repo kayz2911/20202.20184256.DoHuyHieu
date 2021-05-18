@@ -1,6 +1,7 @@
 package hust.soict.globalict.aims.screen;
 import javax.swing.*;
 
+import hust.soict.globalict.aims.cart.Cart;
 import hust.soict.globalict.aims.media.DigitalVideoDisc;
 import hust.soict.globalict.aims.store.Store;
 
@@ -43,7 +44,7 @@ public class AddDigitalVideoDisc extends StoreScreen {
 		
 		return center;
 	}
-	JPanel createBottom(Store store) {
+	JPanel createBottom() {
 		JPanel Bottom = new JPanel();
 		Bottom.setLayout(new GridLayout(1, 5));
 		JButton send = new JButton("Send");
@@ -72,15 +73,16 @@ public class AddDigitalVideoDisc extends StoreScreen {
 		}
 		
 	}
-	public AddDigitalVideoDisc(Store store) {
-		super(store);
+	
+	public AddDigitalVideoDisc(Store store, Cart cart) {
+		super(store, cart);
 		this.store2 = store;
 		Container cp = getContentPane();
 		cp.setLayout(new BorderLayout());
 		
 		cp.add(createNorth(), BorderLayout.NORTH);
 		cp.add(createCenter(), BorderLayout.CENTER);
-		cp.add(createBottom(store), BorderLayout.SOUTH);
+		cp.add(createBottom(), BorderLayout.SOUTH);
 		
 		setVisible(true);
 		setSize(500, 300);

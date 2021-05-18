@@ -1,6 +1,7 @@
 package hust.soict.globalict.aims.screen;
 import javax.swing.*;
 
+import hust.soict.globalict.aims.cart.Cart;
 import hust.soict.globalict.aims.media.CompactDisc;
 import hust.soict.globalict.aims.media.Track;
 import hust.soict.globalict.aims.store.Store;
@@ -109,9 +110,10 @@ public class AddCD extends StoreScreen {
 		}
 	}
 	
-	public AddCD(Store store) {
-		super(store);
-		this.store2 = store;
+	
+	public AddCD(Store store1, Cart cart) {
+		super(store1, cart);
+		this.store2 = store1;
 		Container cp = getContentPane();
 		cp.setLayout(new BorderLayout());
 		
@@ -123,6 +125,4 @@ public class AddCD extends StoreScreen {
 		setSize(500, 300);
 		setTitle("Add CD");
 	}
-	
-	
 }

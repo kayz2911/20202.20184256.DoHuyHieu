@@ -1,6 +1,7 @@
 package hust.soict.globalict.aims.screen;
 import javax.swing.*;
 
+import hust.soict.globalict.aims.cart.Cart;
 import hust.soict.globalict.aims.media.Book;
 
 import hust.soict.globalict.aims.store.Store;
@@ -79,8 +80,9 @@ public class AddBook extends StoreScreen {
 		}
 		
 	}
-	public AddBook(Store store) {
-		super(store);
+	
+	public AddBook(Store store, Cart cart) {
+		super(store, cart);
 		this.store2 = store;
 		Container cp = getContentPane();
 		cp.setLayout(new BorderLayout());
@@ -90,7 +92,7 @@ public class AddBook extends StoreScreen {
 		cp.add(createBottom(), BorderLayout.SOUTH);
 		
 		setVisible(true);
-		setSize(500, 300);
+		setSize(600, 300);
 		setTitle("Add Book");
 	}
 	

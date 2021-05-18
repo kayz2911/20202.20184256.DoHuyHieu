@@ -46,7 +46,10 @@ public class StoreScreen extends JFrame {
 		JMenuItem viewstore = new JMenuItem("View store");
 		viewstore.addActionListener(new ViewstoreListener());
 		menu.add(viewstore);
-		menu.add(new JMenuItem("View cart"));
+		
+		JMenuItem viewcart = new JMenuItem("View Cart");
+		viewcart.addActionListener(new viewCartListener());
+		menu.add(viewcart);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -61,17 +64,17 @@ public class StoreScreen extends JFrame {
 			switch(button) {
 			case "Add Book": {
 				setVisible(false);
-				new AddBook(store);
+				new AddBook(store,cart);
 				break;
 			}
 			case "Add CD": {
 				setVisible(false);
-				new AddCD(store);
+				new AddCD(store,cart);
 				break;
 			}
 			case "Add DVD": {
 				setVisible(false);
-				new AddDigitalVideoDisc(store);
+				new AddDigitalVideoDisc(store,cart);
 				break;
 			}
 			default:
@@ -85,8 +88,19 @@ public class StoreScreen extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			setVisible(false);
-			new StoreScreen(store);
+			new StoreScreen(store,cart);
 		}
+	}
+	
+	private class viewCartListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			setVisible(false);
+			new CartScreen(cart, store);
+		}
+		
 	}
 	
 	
@@ -139,6 +153,7 @@ public class StoreScreen extends JFrame {
 			
 			JButton addtocart = new JButton("Add to Cart");
 			container.add(addtocart);
+			addtocart.addActionListener(new CartListener());
 			
 			if(media instanceof Playable) {
 				JButton play = new JButton("Play");
@@ -153,19 +168,27 @@ public class StoreScreen extends JFrame {
 			this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		} 
 		
-		
+		private class CartListener implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				cart.addMedia(media);
+				JOptionPane.showMessageDialog(null, "Add Sucessfully!");
+			}
+			
+		}
 		
 		private class PlayListener implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				media.play();
-				
+				media.play();	
 			}
 		}
 	}
 	
-	public StoreScreen(Store store1) {
+	public StoreScreen(Store store1, Cart cart) {
+		this.cart = cart;
 		this.store = store1;
 		Container cp = getContentPane();
 		cp.setLayout(new BorderLayout());
@@ -178,8 +201,10 @@ public class StoreScreen extends JFrame {
 		setSize(1024, 768);
 	}
 	
+	
 	public static void main(String[] args) {
 		Store store = new Store();
+		Cart cart = new Cart();
 		List<String> a = new ArrayList<String>();
 		a.add("A");
 		a.add("B");
@@ -194,6 +219,10 @@ public class StoreScreen extends JFrame {
 		store.addMedia(dvd3);
 		store.addMedia(book1);
 		store.addMedia(book2);
-		new StoreScreen(store);
+		new StoreScreen(store,cart);
 	}
+
+	
+	
+	
 }
