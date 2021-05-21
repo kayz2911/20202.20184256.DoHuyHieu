@@ -1,8 +1,10 @@
 package hust.soict.globalict.aims.screen;
 
+import javax.naming.LimitExceededException;
 import javax.swing.JFrame;
 
 import hust.soict.globalict.aims.cart.Cart;
+import hust.soict.globalict.aims.exception.PlayerException;
 import hust.soict.globalict.aims.media.Media;
 import hust.soict.globalict.aims.media.Playable;
 import hust.soict.globalict.aims.store.Store;
@@ -80,13 +82,23 @@ public class CartScreenController extends JFrame{
     @FXML
     void btnRemovePressed(ActionEvent event) {
     	Media media = tblMedia.getSelectionModel().getSelectedItem();
-    	cart.removeMedia(media);
+    	try {
+			cart.removeMedia(media);
+		} catch (LimitExceededException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	TotalCost.setText(Float.toString(cart.totalCost()) + "$");
     }
     @FXML
     void btnPlayPressed(ActionEvent event) {
     	Media media = tblMedia.getSelectionModel().getSelectedItem();
-    	media.play();
+    	try {
+			media.play();
+		} catch (PlayerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     @FXML
     void btnPlaceOrderPressed(MouseEvent event) {

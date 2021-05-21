@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import hust.soict.globalict.aims.exception.PlayerException;
+
 public class DigitalVideoDisc extends Disc implements Playable {
 	public DigitalVideoDisc(String title, String category, String director, int length, float cost,int id) {
 		super(title,category,director,length,cost,id);
@@ -24,12 +26,17 @@ public class DigitalVideoDisc extends Disc implements Playable {
 		super(title,category,cost);
 	}
 	
-	public void play() {
-		JPanel fa = new JPanel();
-		fa.setLayout(new GridLayout(2,1));
-		fa.add(new JLabel("Title:" + title));
-		fa.add(new JLabel("Length: " + length));
-		int result = JOptionPane.showConfirmDialog(null, fa, "Playing " + title, JOptionPane.NO_OPTION);;
+	public void play() throws PlayerException {
+		if(this.getLength() > 0) {
+			JPanel fa = new JPanel();
+			fa.setLayout(new GridLayout(2,1));
+			fa.add(new JLabel("Title:" + title));
+			fa.add(new JLabel("Length: " + length));
+			JOptionPane.showConfirmDialog(null, fa, "Playing " + title, JOptionPane.NO_OPTION);;
+		} else {
+			throw new PlayerException("ERROR: DVD length is non-positive!");
+		}
+		
 	}
 	
 	@Override

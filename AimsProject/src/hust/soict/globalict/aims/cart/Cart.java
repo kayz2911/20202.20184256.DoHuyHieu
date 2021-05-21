@@ -1,4 +1,5 @@
 package hust.soict.globalict.aims.cart;
+import hust.soict.globalict.aims.exception.PlayerException;
 import hust.soict.globalict.aims.media.*;
 
 import javafx.collections.FXCollections;
@@ -46,7 +47,7 @@ public class Cart {
 	}
 	
 	public void removeMedia() {
-		if (itemsOrdered.size() >0) {
+		if (itemsOrdered.size() > 0) {
 			itemsOrdered.remove(itemsOrdered.size()-1);
 		}
 	}
@@ -185,7 +186,12 @@ public class Cart {
 		int flag = 0;
 		for(Media item : itemsOrdered) {
 			if(item.getID() == id) {
-				item.play();
+				try {
+					item.play();
+				} catch (PlayerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				flag = 1;
 			}
 		}

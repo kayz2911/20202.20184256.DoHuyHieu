@@ -1,8 +1,10 @@
 package hust.soict.globalict.aims.screen;
+import javax.naming.LimitExceededException;
 import javax.swing.*;
 
 
 import hust.soict.globalict.aims.cart.Cart;
+import hust.soict.globalict.aims.exception.PlayerException;
 import hust.soict.globalict.aims.media.Book;
 import hust.soict.globalict.aims.media.DigitalVideoDisc;
 import hust.soict.globalict.aims.media.Media;
@@ -172,7 +174,12 @@ public class StoreScreen extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				cart.addMedia(media);
+				try {
+					cart.addMedia(media);
+				} catch (LimitExceededException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				JOptionPane.showMessageDialog(null, "Add Sucessfully!");
 			}
 			
@@ -182,7 +189,12 @@ public class StoreScreen extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				media.play();	
+				try {
+					media.play();
+				} catch (PlayerException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
 			}
 		}
 	}
