@@ -9,6 +9,8 @@ import hust.soict.globalict.aims.media.Track;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.naming.LimitExceededException;
+
 import Threads.MemoryDaemon;
 
 public class Aims {
@@ -75,7 +77,11 @@ public class Aims {
 						int id = scan.nextInt();
 						scan.nextLine();
 						if(aStore.searchByID(id) != null) {
-							anOrder.addMedia(aStore.searchByID(id));
+							try {
+								anOrder.addMedia(aStore.searchByID(id));
+							} catch (LimitExceededException e) {
+								e.printStackTrace();
+							}
 							System.out.println("The number of media is: "+ anOrder.getQtyOrdered());
 						}else {
 							System.out.println("No match is found");

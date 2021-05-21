@@ -3,6 +3,8 @@ package hust.soict.globalict.aims.media;
 import java.time.LocalDate;
 import java.util.Comparator;
 
+import hust.soict.globalict.aims.exception.PlayerException;
+
 abstract public class Media implements Comparable<Media> {
 	public static int nbMedia = 1;
 	public int id;
@@ -67,7 +69,7 @@ abstract public class Media implements Comparable<Media> {
 		return caseInsensitive.contains(title);
 	}
 	
-	public void play() {
+	public void play() throws PlayerException {
 		
 	}
 	

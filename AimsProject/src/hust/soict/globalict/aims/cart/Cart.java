@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 
 import java.util.Scanner;
 
+import javax.naming.LimitExceededException;
+
 
 
 
@@ -29,13 +31,18 @@ public class Cart {
 		return sum;
 	}
 	
-	public void addMedia(Media media) {
-		if(itemsOrdered.size() == 20) {
-			System.out.println("The Cart is almost full");
+	public void addMedia(Media media) throws LimitExceededException {
+		if(media == null) {
+			System.out.print("The media is not in store");
 		}else {
-			itemsOrdered.add(media);
-			System.out.println("The media "+ media.getTitle() +" has been added");
+			if(itemsOrdered.size() < 20) {
+				itemsOrdered.add(media);
+				System.out.println("The media "+ media.getTitle() +" has been added");
+			}else {
+				throw new LimitExceededException("ERROR: The number of media has reached its limit");
+			}
 		}
+		
 	}
 	
 	public void removeMedia() {
@@ -44,9 +51,9 @@ public class Cart {
 		}
 	}
 	
-	public void removeMedia(Media media) {
+	public void removeMedia (Media media)  throws LimitExceededException {
 		if(itemsOrdered.size() == 0) {
-			System.out.println("The Cart is empty");
+			throw new LimitExceededException("ERROR: Cart is empty");
 		}else {
 			itemsOrdered.remove(media);
 			System.out.println("The media "+ media.getTitle() +" has been removed");
