@@ -69,9 +69,7 @@ abstract public class Media implements Comparable<Media> {
 		return caseInsensitive.contains(title);
 	}
 	
-	public void play() throws PlayerException {
-		
-	}
+	
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -89,6 +87,11 @@ abstract public class Media implements Comparable<Media> {
 		}else {
 			return (this.category.compareTo(media.getCategory()));
 		}
+	}
+
+	public void play() throws PlayerException {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

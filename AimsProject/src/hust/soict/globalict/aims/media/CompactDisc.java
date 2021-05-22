@@ -78,21 +78,27 @@ public class CompactDisc extends Disc implements Playable {
 		return sum;
 	}
 	
+	
+	
 	public void play() throws PlayerException {
-		if(this.getLength() > 0) {
+		if ( this.getLength() > 0) {
 			System.out.println("Playing CD: " + this.getTitle());
 			System.out.println("Category CD: " + this.getCategory());
 			System.out.println("Cost CD: " + this.getCost());
 			System.out.println("Length CD:" + this.getLength());
-			
-			java.util.Iterator iter = tracks.iterator();
-			Track nextTrack;
-			while(iter.hasNext()) {
-				nextTrack = (Track) iter.next();
-				nextTrack.play();
+			java.util.Iterator iterator = tracks.iterator();
+			Track nexTrack;
+			while ( iterator.hasNext() ) {
+				nexTrack = (Track) iterator.next();
+				try {
+					nexTrack.play();
+				} catch (PlayerException e) {
+					throw e;
+				}
 			}
-		}else {
-			throw new PlayerException("ERROR: CD Length is non-positive");
+		}
+		else {
+			throw new PlayerException("ERROR: CD length is non-positive");
 		}
 	} 
 	

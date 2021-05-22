@@ -29,7 +29,7 @@ public class Aims {
 		
 		
 		// Create a new DVD objects and add them to the cart
-		DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Aller", 87, 19.95f);
+		DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Aller", 87, 19.95f); // -87
 		aStore.addMedia(dvd1);
 		
 		DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star War", "Science Fiction", "Geogre Lucas", 87, 24.95f);
@@ -39,8 +39,8 @@ public class Aims {
 		aStore.addMedia(dvd3);
 		
 		Track track1 = new Track("A",1);
-		Track track2 = new Track("B",2);
-		Track track3 = new Track("C",3);
+		Track track2 = new Track("B",20);
+		Track track3 = new Track("C",3); //-3  
 		
 		CompactDisc dvd4 = new CompactDisc("Lion Star","Animation","Geogre", 14, 31.2f);
 		dvd4.addTrack(track1);
@@ -80,6 +80,7 @@ public class Aims {
 							try {
 								anOrder.addMedia(aStore.searchByID(id));
 							} catch (LimitExceededException e) {
+								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 							System.out.println("The number of media is: "+ anOrder.getQtyOrdered());

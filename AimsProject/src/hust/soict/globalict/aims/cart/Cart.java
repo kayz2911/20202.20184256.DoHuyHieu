@@ -32,29 +32,24 @@ public class Cart {
 		return sum;
 	}
 	
-	public void addMedia(Media media) throws LimitExceededException {
-		if(media == null) {
-			System.out.print("The media is not in store");
+	public void addMedia(Media media) throws LimitExceededException	 {
+		if(itemsOrdered.size() < 20) {
+			itemsOrdered.add(media);
+			System.out.println("The media "+ media.getTitle() +" has been added");
 		}else {
-			if(itemsOrdered.size() < 20) {
-				itemsOrdered.add(media);
-				System.out.println("The media "+ media.getTitle() +" has been added");
-			}else {
-				throw new LimitExceededException("ERROR: The number of media has reached its limit");
-			}
+			throw new LimitExceededException("ERROR: The number of orders has reached its limit!");
 		}
-		
 	}
 	
 	public void removeMedia() {
-		if (itemsOrdered.size() > 0) {
+		if (itemsOrdered.size() >0) {
 			itemsOrdered.remove(itemsOrdered.size()-1);
 		}
 	}
 	
-	public void removeMedia (Media media)  throws LimitExceededException {
+	public void removeMedia(Media media) {
 		if(itemsOrdered.size() == 0) {
-			throw new LimitExceededException("ERROR: Cart is empty");
+			System.out.println("The Cart is empty");
 		}else {
 			itemsOrdered.remove(media);
 			System.out.println("The media "+ media.getTitle() +" has been removed");
@@ -189,7 +184,6 @@ public class Cart {
 				try {
 					item.play();
 				} catch (PlayerException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				flag = 1;
